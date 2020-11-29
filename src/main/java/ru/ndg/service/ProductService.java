@@ -3,8 +3,10 @@ package ru.ndg.service;
 import org.springframework.data.domain.Page;
 import ru.ndg.model.Product;
 
+import java.util.Map;
+
 public interface ProductService {
 
-    Page<Product> getAllProductsPage(String titlePart, Integer minPrice, Integer maxPrice, Integer page, Integer pageCount);
+    Page<Product> getAllProductsPage(Map<String, String> params, Integer page);
 
 }

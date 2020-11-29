@@ -9,6 +9,8 @@ import ru.ndg.model.Product;
 import ru.ndg.repository.ProductRepository;
 import ru.ndg.repository.specification.ProductSpecification;
 
+import java.util.Map;
+
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -20,18 +22,23 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<Product> getAllProductsPage(String titlePart, Integer minPrice, Integer maxPrice, Integer page, Integer pageCount) {
+    public Page<Product> getAllProductsPage(Map<String, String> params, Integer page) {
         if (page < 0) page = 0;
-        if (pageCount < 1) pageCount = 5;
+        String pc = params.get("pc");
+        int pageCount = 5;
+        if (pc != null && Integer.parseInt(pc) > 0) pageCount = Integer.parseInt(pc);
 
         Specification<Product> specification = Specification.where(null);
-        if (minPrice != null) {
-            specification = specification.and(ProductSpecification.priceGreaterOrEqualsThan(minPrice));
+        String minPrice = params.get("min_price");
+        if (minPrice != null && !minPrice.isEmpty() && !Character.isWhitespace(minPrice.charAt(0))) {
+            specification = specification.and(ProductSpecification.priceGreaterOrEqualsThan(Integer.parseInt(minPrice)));
         }
-        if (maxPrice != null) {
-            specification = specification.and(ProductSpecification.priceLessOrEqualThan(maxPrice));
+        String maxPrice = params.get("max_price");
+        if (maxPrice != null && !maxPrice.isEmpty() && !Character.isWhitespace(maxPrice.charAt(0))) {
+            specification = specification.and(ProductSpecification.priceLessOrEqualThan(Integer.parseInt(maxPrice)));
         }
-        if (titlePart != null && !titlePart.isEmpty()) {
+        String titlePart = params.get("title_part");
+        if (titlePart != null && !titlePart.isEmpty() && !Character.isWhitespace(titlePart.charAt(0))) {
             specification = specification.and(ProductSpecification.titleLikeThan(titlePart));
         }
         return productRepository.findAll(specification, PageRequest.of(page, pageCount));

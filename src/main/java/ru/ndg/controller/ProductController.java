@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.ndg.service.ProductService;
 
+import java.util.Map;
+
 @Controller
 @RequestMapping(value = "/product")
 public class ProductController {
@@ -21,13 +23,10 @@ public class ProductController {
 
     @GetMapping
     public String getAllProductsPage(
-            @RequestParam(name = "min_price", required = false) Integer min
-            , @RequestParam(name = "max_price", required = false) Integer max
-            , @RequestParam(name = "title_part", required = false) String titlePart
+            @RequestParam Map<String, String> params
             , @RequestParam(name = "p", defaultValue = "1") Integer page
-            , @RequestParam(name = "pc", defaultValue = "5", required = false) Integer pageCount
             , Model model) {
-        model.addAttribute("products", productService.getAllProductsPage(titlePart, min, max, page - 1, pageCount));
+        model.addAttribute("products", productService.getAllProductsPage(params, page - 1));
         return "products";
     }
 }
