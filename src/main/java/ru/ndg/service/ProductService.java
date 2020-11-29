@@ -5,6 +5,6 @@ import ru.ndg.model.Product;
 
 public interface ProductService {
 
-    Page<Product> getAllProductsPage(Integer min, Integer max, Integer page, Integer pageCount);
+    Page<Product> getAllProductsPage(String titlePart, Integer minPrice, Integer maxPrice, Integer page, Integer pageCount);
 
 }

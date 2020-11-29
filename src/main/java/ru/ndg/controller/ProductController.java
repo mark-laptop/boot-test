@@ -20,12 +20,14 @@ public class ProductController {
     }
 
     @GetMapping
-    public String getAllProductsPage(@RequestParam(name = "min", required = false) Integer min
-            , @RequestParam(name = "max", required = false) Integer max
+    public String getAllProductsPage(
+            @RequestParam(name = "min_price", required = false) Integer min
+            , @RequestParam(name = "max_price", required = false) Integer max
+            , @RequestParam(name = "title_part", required = false) String titlePart
             , @RequestParam(name = "p", defaultValue = "1") Integer page
             , @RequestParam(name = "pc", defaultValue = "5", required = false) Integer pageCount
             , Model model) {
-        model.addAttribute("products", productService.getAllProductsPage(min, max, page - 1, pageCount));
+        model.addAttribute("products", productService.getAllProductsPage(titlePart, min, max, page - 1, pageCount));
         return "products";
     }
 }
