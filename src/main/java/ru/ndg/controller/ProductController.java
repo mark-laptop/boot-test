@@ -22,7 +22,7 @@ public class ProductController {
     @GetMapping
     public String getAllProductsPage(@RequestParam(name = "min", required = false) Integer min
             , @RequestParam(name = "max", required = false) Integer max
-            , @RequestParam(name = "p") Integer page
+            , @RequestParam(name = "p", defaultValue = "1") Integer page
             , @RequestParam(name = "pc", defaultValue = "5", required = false) Integer pageCount
             , Model model) {
         model.addAttribute("products", productService.getAllProductsPage(min, max, page - 1, pageCount));
