@@ -40,17 +40,17 @@
             <div class="col-12">
                 <label for="titleInput">Название продукта</label>
                 <input id="titleInput" name="title_part" type="text"
-                       th:value="${param.title_part != null ? param.title : null}">
+                       th:value="${param.title_part != null ? param.title_part : null}">
             </div>
             <div class="col-12">
                 <label for="minPrice">Минимальная цена продукта</label>
                 <input id="minPrice" name="min_price" type="number"
-                       th:value="${param.min_price != null ? param.minPrice : null}">
+                       th:value="${param.min_price != null ? param.min_price : null}">
             </div>
             <div class="col-12">
                 <label for="maxPrice">Максимальная цена продукта</label>
                 <input id="maxPrice" name="max_price" type="number"
-                       th:value="${param.max_price != null ? param.maxPrice : null}">
+                       th:value="${param.max_price != null ? param.max_price : null}">
             </div>
             <button type="submit">Применить</button>
         </form>
