@@ -34,6 +34,29 @@
 
 <div class="container">
     <div class="row py-2">
+
+        <h3>Филтры</h3>
+        <form method="get" th:action="@{/product}">
+            <div class="col-12">
+                <label for="titleInput">Название продукта</label>
+                <input id="titleInput" name="title_part" type="text"
+                       th:value="${param.title != null ? param.title : null}">
+            </div>
+            <div class="col-12">
+                <label for="minPrice">Минимальная цена продукта</label>
+                <input id="minPrice" name="min_price" type="number"
+                       th:value="${param.minPrice != null ? param.minPrice : null}">
+            </div>
+            <div class="col-12">
+                <label for="maxPrice">Максимальная цена продукта</label>
+                <input id="maxPrice" name="max_price" type="number"
+                       th:value="${param.maxPrice != null ? param.maxPrice : null}">
+            </div>
+            <button type="submit">Применить</button>
+        </form>
+
+        <br>
+
         <div class="col-12">
             <a class="btn btn-primary" th:href="@{/product/new}">Add Product</a>
         </div>
@@ -54,8 +77,10 @@
                     <td th:text="${product.title}"></td>
                     <td th:text="${product.price}"></td>
                     <td>
-                        <a class="btn btn-success" th:href="@{/product/{id}(id = ${product.id})}"><i class="fas fa-edit"></i></a>
-                        <a class="btn btn-danger" th:href="@{/product/delete/{id}(id = ${product.id})}"><i class="far fa-trash-alt"></i></a>
+                        <a class="btn btn-success" th:href="@{/product/{id}(id = ${product.id})}"><i
+                                class="fas fa-edit"></i></a>
+                        <a class="btn btn-danger" th:href="@{/product/delete/{id}(id = ${product.id})}"><i
+                                class="far fa-trash-alt"></i></a>
                     </td>
                 </tr>
                 </tbody>
